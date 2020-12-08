@@ -1,4 +1,4 @@
-# usage: create_kernel.sh {envname}
+# usage: bash create_kernel.sh {envname}
 if [ ! -d /opt/conda/envs/$1 ] ; then
   echo "The conda environment named $1 does not exist!"
   exit 1

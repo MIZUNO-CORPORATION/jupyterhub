@@ -7,6 +7,6 @@ sudo useradd -g jupyter $1 -m -p $(openssl passwd -1 "password") -s /bin/bash
 # change permision root to user and group
 sudo chown -R $1:jupyter /home/$1
 
-cat /home/adminserver/jupyterhub/bash-sh.txt >> /home/$1/.bashrc
+sudo cat /home/adminserver/jupyterhub/bash-sh.txt >> /home/$1/.bashrc
 sudo cp /home/adminserver/jupyterhub/create_kernel.sh /home/$1/
 
