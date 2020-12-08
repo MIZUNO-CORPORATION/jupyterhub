@@ -1,8 +1,39 @@
 # JupyterHub
 
+## Admin
+
+### ユーザー追加・削除
+
+- `adminserver`でログイン
+
+  ```bash
+  su - adminserver
+  >*****
+  
+  cd ~/jupyterhub
+  ```
+
+  - ユーザー追加
+
+    ※Passwordはデフォルトで`password`と設定される．ユーザーが任意のものに変更可能．
+
+    ```bash
+    sudo bash add_user.sh {user name}
+    ```
+
+  - ユーザー削除
+
+    ```bash
+    sudo bash delete_user.sh {username}
+    ```
+
+    
+
+## Installation
+
 参考：https://nodaki.hatenablog.com/entry/2019/04/17/220613
 
-https://jupyterhub.readthedocs.io/en/stable/installation-guide-hard.html
+参考：https://jupyterhub.readthedocs.io/en/stable/installation-guide-hard.html
 
 - ログイン
   ```bash
@@ -19,8 +50,8 @@ https://jupyterhub.readthedocs.io/en/stable/installation-guide-hard.html
   sudo useradd adminserver -g jupyter -m -s /bin/bash
   sudo usermod -aG sudo adminserver # sudoの実行権限を与える
   sudo passwd adminserver
-  >rds3007
-  >rds3007
+  >******
+  >******
   ```
   
 - 以下は`adminserver`で作業
@@ -39,6 +70,7 @@ https://jupyterhub.readthedocs.io/en/stable/installation-guide-hard.html
   sudo /opt/jupyterhub/bin/python3 -m pip install ipywidgets
   
   sudo chmod 775 -R /opt/jupyterhub/share
+  sudo chmod 775 -R /opt/jupyterhub/lib
   ```
   
 - 依存関係インストール
@@ -107,7 +139,7 @@ https://jupyterhub.readthedocs.io/en/stable/installation-guide-hard.html
   sudo /home/adminserver/.conda/envs/py37/bin/python -m ipykernel install --prefix=/opt/jupyterhub/ --name 'python' --display-name "Python (default)"
   
   sudo chown -R adminserver:jupyter /opt/conda
-  sudo chmod 775 -R /opt/conda # jupyter groupに属したuserはconda環境を弄れる
+  sudo chmod 775 -R /opt/conda/envs # jupyter groupに属したuserはcondaの仮想環境を弄れる # base環境のPythonのバージョンが壊れるとcondaコマンドが動かなくなる．それを防ぐために，base環境はadminserverのみ弄れるようにしている．
   ```
   
 - nginxインストール
@@ -121,17 +153,18 @@ https://jupyterhub.readthedocs.io/en/stable/installation-guide-hard.html
   ```bash
   sudo vi /etc/nginx/conf.d/mizuno-colab.conf
   
-# 以下追記
+  
+  # 以下追記
   map $http_upgrade $connection_upgrade {
           default upgrade;
           '' close;
       }
-  
+
   server {
     listen 80;
     # ドメインもしくはIPを指定
     server_name localhost;
-  
+
     access_log /var/log/nginx/access.log;
     error_log  /var/log/nginx/error.log;
     	
@@ -141,17 +174,17 @@ https://jupyterhub.readthedocs.io/en/stable/installation-guide-hard.html
     location /jupyter/ {
         # NOTE important to also set base url of jupyterhub to /jupyter in its config
         proxy_pass http://127.0.0.1:8000;
-  
+      
         proxy_redirect   off;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header Host $host;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
-  
+      
         # websocket headers
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection $connection_upgrade;
-  
+      
       }
   ```
   
@@ -190,5 +223,3 @@ https://jupyterhub.readthedocs.io/en/stable/installation-guide-hard.html
   ```
 
   
-
-### 
