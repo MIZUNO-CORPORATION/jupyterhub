@@ -9,4 +9,4 @@ sudo chown -R $1:jupyter /home/$1
 
 sudo cat /home/adminserver/jupyterhub/bash-sh.txt >> /home/$1/.bashrc
 sudo cp /home/adminserver/jupyterhub/create_kernel.sh /home/$1/
-
+sudo cp /home/adminserver/jupyterhub/manual.md /home/$1/
