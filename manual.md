@@ -8,7 +8,7 @@
 
 - 左側の＋をクリックして，`Launcher`起動
 
-  
+
   ![launcher.png](https://user-images.githubusercontent.com/63040751/101456181-06a06b00-3977-11eb-8c0b-453fc7294243.png)
 
 - Other > Terminalを起動し，`passwd`コマンドで変更可能

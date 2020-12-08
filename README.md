@@ -35,6 +35,8 @@
 
 参考：https://jupyterhub.readthedocs.io/en/stable/installation-guide-hard.html
 
+### JupyterHubインストール
+
 - ログイン
   ```bash
   ssh mlserver@172.16.30.88
@@ -124,7 +126,8 @@
   sudo systemctl status jupyterhub.service
   ```
 
-  
+
+### Anaconda インストール
 
 - Anacondaインストール（バージョンは適宜指定で）
 
@@ -141,7 +144,9 @@
   sudo chown -R adminserver:jupyter /opt/conda
   sudo chmod 775 -R /opt/conda/envs # jupyter groupに属したuserはcondaの仮想環境を弄れる # base環境のPythonのバージョンが壊れるとcondaコマンドが動かなくなる．それを防ぐために，base環境はadminserverのみ弄れるようにしている．
   ```
-  
+
+### nginx インストール
+
 - nginxインストール
 
   ```bash
@@ -198,12 +203,24 @@
 
 - あとは，http://172.16.30.88/jupyter　にアクセスできればOK．
 
+### 管理用ディレクトリ
+
 - ユーザー追加用スクリプトの作成
 
   ```bash
   mkdir ~/jupyterhub && cd ~/jupyterhub
   git clone https://github.com/MIZUNO-CORPORATION/jupyterhub.git
   ```
+
+- カーネルディレクトリは`/opt/jupyterhub/share/jupyter/kernels/`に保存されている
+
+  - カーネルの削除
+  
+    ```bash
+    rm -rf /opt/jupyterhub/share/jupyter/kernels/{kernel name}
+    ```
+
+  
 
 - 使い方
 
