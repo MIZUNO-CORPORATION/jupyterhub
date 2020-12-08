@@ -45,7 +45,7 @@
   bash create_kernel.sh {env name}
   ```
 
-- Launcherをみると，`Python(env name)`というKernelが追加されているので，それをクリックすればOK．
+- File > Log Outから一回ログアウトして，Launcherをみると，`Python(env name)`というKernelが追加されているので，それをクリックすればOK．
 
 
   ![kernel.png](https://user-images.githubusercontent.com/63040751/101456179-04d6a780-3977-11eb-82d9-8ad8516921cb.png)
