@@ -141,6 +141,8 @@
   conda create -n py37 python=3.7 ipykernel
   sudo /home/adminserver/.conda/envs/py37/bin/python -m ipykernel install --prefix=/opt/jupyterhub/ --name 'python' --display-name "Python (default)"
   
+  sudo ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh
+  
   sudo chown -R adminserver:jupyter /opt/conda
   sudo chmod 775 -R /opt/conda/envs # jupyter groupに属したuserはcondaの仮想環境を弄れる # base環境のPythonのバージョンが壊れるとcondaコマンドが動かなくなる．それを防ぐために，base環境はadminserverのみ弄れるようにしている．
   ```
