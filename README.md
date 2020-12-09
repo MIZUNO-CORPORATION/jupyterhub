@@ -206,6 +206,16 @@
 
 - あとは，http://172.16.30.88/jupyter　にアクセスできればOK．
 
+### Shareフォルダ
+
+```bash
+mkdir /opt/shared
+sudo chown -R adminserver:jupyter /opt/shared
+sudo chmod 775 /opt/shared
+```
+
+
+
 ### 管理用ディレクトリ
 
 - ユーザー追加用スクリプトの作成
