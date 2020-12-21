@@ -217,9 +217,19 @@ sudo chmod 775 /opt/shared
 ### Softwareフォルダ
 
 ```bash
-mkdir /opt/software
+mkdir -p /opt/software/bin
 sudo chown -R adminserver:jupyter /opt/software
 sudo chmod 775 /opt/software
+sudo chmod 775 /opt/software/bin
+```
+
+全ユーザーへこの`/opt/software/bin`のパスを通す．
+
+```bash
+sudo vi /etc/profile.d/custom_path.sh
+
+# shared software
+export PATH="/opt/software/bin:$PATH"
 ```
 
 ### 管理用ディレクトリ
