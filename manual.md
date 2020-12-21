@@ -50,6 +50,38 @@
 
   ![kernel.png](https://user-images.githubusercontent.com/63040751/101456179-04d6a780-3977-11eb-82d9-8ad8516921cb.png)
 
+
+
+## Github連携
+
+Githubで管理したい場合は，[ここに書いた方法](https://github.com/MIZUNO-CORPORATION/tutorial/wiki/SSH)と同じように設定すればOKです．
+
+```bash
+cd ~/.ssh
+ssh-keygen -t rsa -f id_git_rsa
+chmod 600 id_git_rsa
+```
+
+`config`ファイルに以下追記
+
+```bash
+vi config
+
+Host github.com
+  HostName github.com
+  User git
+  Port 22
+  IdentityFile ~/.ssh/id_git_rsa
+  TCPKeepAlive yes
+  IdentitiesOnly yes
+```
+
+以下で表示される文字列をGithubのSSHの欄にコピペ
+
+```bash 
+cat id_git_rsa.pub
+```
+
 ## 実行ファイルの共有
 
 YoloやOpenPoseなどの実行ファイルを共有するには，`/opt/software`ディレクトリ でbuildする．
