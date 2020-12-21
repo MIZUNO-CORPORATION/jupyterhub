@@ -214,7 +214,13 @@ sudo chown -R adminserver:jupyter /opt/shared
 sudo chmod 775 /opt/shared
 ```
 
+### Softwareフォルダ
 
+```bash
+mkdir /opt/software
+sudo chown -R adminserver:jupyter /opt/software
+sudo chmod 775 /opt/software
+```
 
 ### 管理用ディレクトリ
 

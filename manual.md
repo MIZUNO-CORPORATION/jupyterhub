@@ -49,3 +49,14 @@
 
 
   ![kernel.png](https://user-images.githubusercontent.com/63040751/101456179-04d6a780-3977-11eb-82d9-8ad8516921cb.png)
+
+## 実行ファイルの共有
+
+YoloやOpenPoseなどの実行ファイルを共有するには，`/opt/software`ディレクトリ でbuildする．
+
+※デフォルトでは，他のユーザーは書き込みのみできない（読み込み・実行の権限はある）ようになる．
+
+```bash
+cd /opt/software
+git clone ~~
+```
