@@ -91,4 +91,9 @@ YoloやOpenPoseなどの実行ファイルを共有するには，`/opt/software
 ```bash
 cd /opt/software
 git clone ~~
+
+# build
+
+# シンボリックリンクを貼る
+ln -s /opt/software/~~~~/~~.bin /opt/software/bin/
 ```
