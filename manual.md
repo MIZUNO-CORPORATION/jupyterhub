@@ -22,6 +22,12 @@
   > Retype new UNIX password: {your new password}
   ```
 
+## ファイル（データセット等）の共有
+
+sharedフォルダ（正確にはシンボリックリンク）をhomeディレクトリ直下に用意しました．その中にデータセット等の共有したいファイルをアップロードしていってください．
+
+![shared](https://user-images.githubusercontent.com/63040751/102979312-3f306f00-4549-11eb-91d2-dce614fd6ecf.JPG)
+
 ## 仮想環境の作り方
 
 基本的には，Anacondaの仮想環境の作り方と同じです．（最後だけちょっと違います）
