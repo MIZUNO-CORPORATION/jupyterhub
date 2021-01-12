@@ -47,9 +47,19 @@ sharedフォルダ（正確にはシンボリックリンク）をhomeディレ�
 
 - Jupyter用のカーネル作成
 
+  共有する場合
+
   ```bash
   bash create_kernel.sh {env name}
   ```
+
+  共有しない場合
+
+  ```bash
+  bash create_kernel.sh {env name} --no-share
+  ```
+
+  
 
 - File > Log Outから一回ログアウトして，Launcherをみると，`Python(env name)`というKernelが追加されているので，それをクリックすればOK．
 
