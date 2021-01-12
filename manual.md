@@ -59,7 +59,17 @@ sharedフォルダ（正確にはシンボリックリンク）をhomeディレ�
   bash create_kernel.sh {env name} --no-share
   ```
 
-  
+- `Syntax Error`がでるとき
+
+  ```bash
+  conda parso list
+  ```
+
+  で`parso`のバージョンを確認して，それより下のバージョンにダウングレード．
+
+  ```bash
+  conda install parso=*.*
+  ```
 
 - File > Log Outから一回ログアウトして，Launcherをみると，`Python(env name)`というKernelが追加されているので，それをクリックすればOK．
 
