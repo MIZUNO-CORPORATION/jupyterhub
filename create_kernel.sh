@@ -22,7 +22,8 @@ do
     case $1 in
         -n | --no-share)
             # no share 
-            ~/.conda/envs/$ENV_NAME/bin/python -m ipykernel install --name "$ENV_NAME" --display-name "Python ($ENV_NAME)"
+            conda activate $ENV_NAME	    
+            ipython kernel install --user --name=$ENV_NAME
             exit 0
             ;;
         --)
