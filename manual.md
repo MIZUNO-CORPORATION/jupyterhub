@@ -203,3 +203,12 @@ ln -s /opt/software/~~~~/~~.bin /opt/software/bin/
   接続先のディレクトリを接続元のVSCodeで開ける！！
 
   ![remote ssh4](https://user-images.githubusercontent.com/16914891/104997514-0cf12f00-5a6d-11eb-9371-a42a52219e2c.png)
+  
+- Extensionが読み込めない場合
+
+  ```bash
+  ssh {host}
+  rm -rf .vscode-server
+  ```
+
+  
