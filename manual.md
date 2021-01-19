@@ -123,3 +123,83 @@ git clone ~~
 # シンボリックリンクを貼る
 ln -s /opt/software/~~~~/~~.bin /opt/software/bin/
 ```
+
+## Visual Studio Code
+
+現状のJupyterhubでは，Intellisenseが効かないので，VSCodeのRemote SSHを使って開発した方が効率上がりそう．
+
+### SSH設定
+
+- 接続元で，SSHの鍵を設定
+
+  `{hoge}`は任意
+
+  ```bash
+  cd ~/.ssh
+  ssh-keygen -t rsa -f id_{hoge}_rsa
+  # パスフレーズ設定は任意
+  ```
+
+- `config`ファイルの編集
+
+  `{username}`は自分のユーザーネーム，`{host}`は任意．
+
+  ```config
+  vi ~/.ssh/config
+  
+  Host {host}
+  	HostName 172.16.30.88
+  	User {username}
+  	Port 22
+  	IdentityFile ~/.ssh/id_{hoge}_rsa
+  ```
+
+- できた`id_hoge_rsa.pub`を接続先にコピー
+
+  ```bash
+  scp ~/.ssh/id_{hoge}_rsa.pub {host}:~
+  ```
+  
+- 接続先にSSHして，公開鍵登録
+
+  ```bash
+  ssh {host}
+  cat id_jkmlserver_rsa.pub >> .ssh/authorized_keys
+  rm id_jkmlserver_rsa.pub
+  chmod 600 .ssh/authorized_keys
+  ```
+
+- もう一度接続して，パスワードを聞かれなければOK
+
+  ```bash
+  ssh {host}
+  ```
+
+### VSCode設定
+
+- Visual Studio Codeインストール
+
+  [公式サイト](https://code.visualstudio.com/)からダウンロードして，インストール
+
+- Remote Developmentインストール（本当はRemote SSHでいいけど，せっかくなので全部インストールします）
+
+  ![remote ssh](https://user-images.githubusercontent.com/16914891/104996836-ed0d3b80-5a6b-11eb-9d8e-e49cde240159.JPG)
+
+- 歯車マーク→Settings→Extensions→Remote-SSH→Remote Platform
+
+  `Item`：上記で設定した`{host}`，`Value`：接続先のOSを設定
+
+  ![remote ssh2](https://user-images.githubusercontent.com/16914891/104996849-f26a8600-5a6b-11eb-992d-343b92a2ca59.png)
+
+  
+
+- 左下の＞＜→Remote-SSH: Connect to Host...→`{host}`
+  で新しくVSCodeのWindowが立ち上がり，エラーが出なければOK！
+
+  ![remote ssh3](https://user-images.githubusercontent.com/16914891/104996845-f1395900-5a6b-11eb-9b41-423b899b3138.png)
+
+- Open Folderすると．．．
+
+  接続先のディレクトリを接続元のVSCodeで開ける！！
+
+  ![remote ssh4](https://user-images.githubusercontent.com/16914891/104997514-0cf12f00-5a6d-11eb-9371-a42a52219e2c.png)
