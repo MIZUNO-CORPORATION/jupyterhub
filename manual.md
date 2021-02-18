@@ -211,4 +211,18 @@ ln -s /opt/software/~~~~/~~.bin /opt/software/bin/
   rm -rf .vscode-server
   ```
 
-  
+
+## Fileのダウンロード
+
+Jupyterhubでは，ディレクトリ単位でダウンロードできない（2020/02/18現在）ので，SCPがおすすめ．
+
+※上述のSSH設定をしている必要あり
+
+（Windowsの場合）Git bashを開いて，以下のコマンドでローカルのホームディレクトリにディレクトリごとダウンロードできる．
+
+`{host}`は上述のホスト名，`{hoge}`含め`shared/{hoge}`はJupyterhub上の任意のパス
+
+```bash
+scp -r {host}:~/shared/{hoge} ~/
+```
+

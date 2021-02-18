@@ -89,7 +89,7 @@
   cd /opt/jupyterhub/etc/jupyterhub/
   
   sudo /opt/jupyterhub/bin/jupyterhub --generate-config
-  sudo vi jupyterhub_condfig.py
+  sudo vi jupyterhub_config.py
   
   # 112行目付近
   c.JupyterHub.bind_url = 'http://:8000/jupyter'
