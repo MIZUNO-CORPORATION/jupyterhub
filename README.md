@@ -91,13 +91,19 @@
   sudo /opt/jupyterhub/bin/jupyterhub --generate-config
   sudo vi jupyterhub_config.py
   
+  #vimでは，/{word}で検索可能．nで次の検索結果へ
   # 112行目付近
   c.JupyterHub.bind_url = 'http://:8000/jupyter'
   
   # 696行目付近
   c.Spawner.default_url = '/lab'
+  
+  # 最後にでも追記
+  # login時のバグらしい
+  # ref: https://github.com/jupyterhub/jupyterhub/issues/486
+  c.PAMAuthenticator.open_sessions = False
   ```
-
+  
 - 自動起動設定
 
   ```bash
@@ -146,6 +152,22 @@
   sudo chown -R adminserver:jupyter /opt/conda
   sudo chmod 775 -R /opt/conda/envs # jupyter groupに属したuserはcondaの仮想環境を弄れる # base環境のPythonのバージョンが壊れるとcondaコマンドが動かなくなる．それを防ぐために，base環境はadminserverのみ弄れるようにしている．
   ```
+
+### Miniconda インストール
+
+Anaconda商用利用有償化に伴い，追記（2021/03/05）
+
+- Minicondaインストール
+
+  必要なバージョンを[公式サイト](https://docs.conda.io/en/latest/miniconda.html)や[バージョン履歴](https://repo.anaconda.com/miniconda/)から選ぶ
+  
+  ```bash
+  wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
+  sudo /bin/bash ~/miniconda.sh -p /opt/conda
+  rm ~/anaconda.sh
+  source ~/.bashrc
+  ```
+
 
 ### nginx インストール
 
@@ -228,8 +250,19 @@ sudo chmod 775 /opt/software/bin
 ```bash
 sudo vi /etc/profile.d/custom_path.sh
 
+# CUDA
+export PATH="/usr/local/cuda/bin:$PATH"
+export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
+
 # shared software
 export PATH="/opt/software/bin:$PATH"
+
+# proxy
+# ここは直接入力した方が良さげ
+# http://username:password@host:port/
+export http_proxy="${http_proxy}"
+export https_proxy="${https_proxy}"
+export ftp_proxy="${ftp_proxy}"
 ```
 
 ### 管理用ディレクトリ
@@ -268,4 +301,15 @@ export PATH="/opt/software/bin:$PATH"
   create_kernel.sh {envname}
   ```
 
-  
+
+## Upgrade
+
+```bash
+sudo systemctl stop jupyterhub.service 
+# backup
+sudo cp /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py ~/jupyterhub/
+# upgrade
+sudo /opt/jupyterhub/bin/python3 -m pip install -U jupyterhub
+# もしエラーが出て，Pipそのもののバージョンを上げるときは要注意！19が良さげ．
+```
+
