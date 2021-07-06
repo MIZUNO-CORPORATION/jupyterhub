@@ -300,6 +300,14 @@ export ftp_proxy="${ftp_proxy}"
   # create kernel for jupyter
   create_kernel.sh {envname}
   ```
+  
+  - Anaconda→pyenv+pip
+  
+    ```bash
+    sudo bash to_pyenv.sh {username}
+    ```
+  
+    
 
 
 ## Upgrade
