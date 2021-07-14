@@ -30,53 +30,76 @@ sharedフォルダ（正確にはシンボリックリンク）をhomeディレ�
 
 ## 仮想環境の作り方
 
-基本的には，Anacondaの仮想環境の作り方と同じです．（最後だけちょっと違います）
+<strike>基本的には，Anacondaの仮想環境の作り方と同じです．（最後だけちょっと違います）</strike>
 
-- 任意の名前で仮想環境を作成
+pyenv+venv+pipを使った環境構築に変更しました．
 
-  ```bash
-  conda create -n {env name} python=*.*
-  ```
-
-- アクティベートしてパッケージのインストール
+- pythonの任意のバージョンをインストール
 
   ```bash
-  conda activate {env name}
-  conda install {package name, e.g: numpy}
+  pyenv install 3.8.11
   ```
 
-- Jupyter用のカーネル作成
-
-  共有する場合
+- pyenvのバージョンを確認
 
   ```bash
-  bash create_kernel.sh {env name}
+  pyenv versions
+  
+  # 以下のように現在使おうとしているバージョンがアスタリスク＊で表示される
+  * system (set by /home/jkado/.pyenv/version)
+    3.8.11
   ```
 
-  共有しない場合
+- バージョンの変更
+
+  - 全体
+
+    ```bash
+    pyenv global 3.8.11
+    ```
+
+  - ディレクトリ内のみ
+
+    ```bash
+    pyenv local 3.8.11
+    ```
+
+- プログラムのあるディレクトリに移動し，venv作成（ここまでが最初にやるべき作業）
 
   ```bash
-  bash create_kernel.sh {env name} --no-share
+  cd /path/to/program
+  python -m venv .venv # これで.venvディレクトリが作成されます．.venvは任意の名前でOKです．
   ```
 
-- `Syntax Error`がでるとき
+- venvを有効にする（`conda activate`に相当）
+
+  `(.venv) ~$`と出ればOK．
+  
+  ```bash
+source .venv/bin/activate
+  ```
+  
+- あとは，自由にpipでインストール
 
   ```bash
-  conda parso list
+  (.venv) ~$ pip install numpy ~~
   ```
 
-  で`parso`のバージョンを確認して，それより下のバージョンにダウングレード．
+## Jupyter実行
+
+- 上記のように仮想環境`.venv`を作成する．
+
+- Jupyterhub上で実行するには，kernelを作成しなければならない
+
+  - `{path/to/project} `は`.venv`上のディレクトリパス
+  - `{env name}`は任意の名前
+  - `--no-share`はオプション引数．これをつけると，その他のユーザーに環境を公開しない
 
   ```bash
-  conda install parso=*.*
+  bash create_kernel.sh {path/to/project} {env name} [--no-share]
   ```
 
-- File > Log Outから一回ログアウトして，Launcherをみると，`Python(env name)`というKernelが追加されているので，それをクリックすればOK．
-
-
-  ![kernel.png](https://user-images.githubusercontent.com/63040751/101456179-04d6a780-3977-11eb-82d9-8ad8516921cb.png)
-
-
+  
 
 ## Github連携
 

@@ -153,19 +153,24 @@
   sudo chmod 775 -R /opt/conda/envs # jupyter groupに属したuserはcondaの仮想環境を弄れる # base環境のPythonのバージョンが壊れるとcondaコマンドが動かなくなる．それを防ぐために，base環境はadminserverのみ弄れるようにしている．
   ```
 
-### Miniconda インストール
+### Pyenvインストール
 
 Anaconda商用利用有償化に伴い，追記（2021/03/05）
 
-- Minicondaインストール
+- Pyenvインストール
 
-  必要なバージョンを[公式サイト](https://docs.conda.io/en/latest/miniconda.html)や[バージョン履歴](https://repo.anaconda.com/miniconda/)から選ぶ
+  Pyenvをadminserver直下にインストール
   
   ```bash
-  wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
-  sudo /bin/bash ~/miniconda.sh -p /opt/conda
-  rm ~/anaconda.sh
-  source ~/.bashrc
+  git clone https://github.com/pyenv/pyenv.git
+  ```
+  
+  このままでは，SSLエラーが出る可能性があるので，`libssl`のバージョンを変更（[リンク](https://github.com/pyenv/pyenv/wiki/Common-build-problems#error-the-python-ssl-extension-was-not-compiled-missing-the-openssl-lib)）
+  
+  ```bash
+  sudo apt-get remove libssl-dev
+  sudo apt-get update
+  sudo apt-get install libssl1.0-dev
   ```
 
 
