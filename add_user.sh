@@ -12,6 +12,6 @@ sudo cp -r /home/adminserver/.pyenv /home/$1/
 sudo chown -R $1:jupyter /home/$1/.pyenv
 
 sudo cat /home/adminserver/jupyterhub/bash-sh.txt >> /home/$1/.bashrc
-#sudo ln -s /home/adminserver/jupyterhub/create_kernel.sh /home/$1/
+sudo ln -s /home/adminserver/jupyterhub/create_kernel.sh /home/$1/
 sudo ln -s /home/adminserver/jupyterhub/manual.md /home/$1/
 sudo ln -s /opt/shared /home/$1/

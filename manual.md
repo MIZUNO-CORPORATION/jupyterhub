@@ -153,7 +153,7 @@ ln -s /opt/software/~~~~/~~.bin /opt/software/bin/
 
 ### SSH設定
 
-- 接続元で，SSHの鍵を設定
+- 接続元（ローカル側）で，SSHの鍵を設定（Windowsは[Git bash](https://git-scm.com/download/win)をインストールしてください）
 
   `{hoge}`は任意
 
@@ -183,7 +183,7 @@ ln -s /opt/software/~~~~/~~.bin /opt/software/bin/
   scp ~/.ssh/id_{hoge}_rsa.pub {host}:~
   ```
   
-- 接続先にSSHして，公開鍵登録
+- 接続先（AIサーバー側）にSSHして，公開鍵登録
 
   ```bash
   ssh {host}
