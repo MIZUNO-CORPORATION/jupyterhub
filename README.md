@@ -318,9 +318,10 @@ export ftp_proxy="${ftp_proxy}"
 ## Upgrade
 
 ```bash
+su - adminserver
 sudo systemctl stop jupyterhub.service 
 # backup
-sudo cp /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py ~/jupyterhub/
+sudo cp /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py ~/backup/
 # upgrade
 sudo /opt/jupyterhub/bin/python3 -m pip install -U jupyterhub
 # もしエラーが出て，Pipそのもののバージョンを上げるときは要注意！19が良さげ．
