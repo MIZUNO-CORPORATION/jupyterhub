@@ -19,6 +19,7 @@
 
     ```bash
     sudo bash add_user.sh {user name}
+    sudo bash add_external_user.sh {user name} # 外部ユーザーの場合
     ```
 
   - ユーザー削除
@@ -26,7 +27,6 @@
     ```bash
     sudo bash delete_user.sh {username}
     ```
-
     
 
 ## Installation
@@ -238,7 +238,7 @@ Anaconda商用利用有償化に伴い，追記（2021/03/05）
 ```bash
 mkdir /opt/shared
 sudo chown -R adminserver:jupyter /opt/shared
-sudo chmod 775 /opt/shared
+sudo chmod 770 /opt/shared # 外部ユーザーには見せない
 ```
 
 ### Softwareフォルダ
@@ -311,8 +311,6 @@ export ftp_proxy="${ftp_proxy}"
     ```bash
     sudo bash to_pyenv.sh {username}
     ```
-  
-    
 
 
 ## Upgrade
